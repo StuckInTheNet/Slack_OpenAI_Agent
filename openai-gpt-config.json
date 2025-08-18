@@ -1,0 +1,115 @@
+{
+  "name": "Slack Workspace Assistant",
+  "description": "An AI assistant that can access and analyze your Slack workspace messages, providing insights about conversations, summaries, and answers to questions about your team's activity.",
+  "instructions": "You are a Slack Workspace Assistant with access to a user's Slack workspace data through API endpoints. You can help users understand what's happening in their Slack workspace, search for specific conversations, get summaries of channel activity, and answer questions about team communications.\n\nYou have access to these API endpoints:\n- /api/search?query=text - Search for messages containing specific text\n- /api/recent?channel=CHANNEL_ID&hours=24&limit=100 - Get recent messages from a channel or all channels\n- /api/summary?channel=CHANNEL_ID&hours=24 - Get summary statistics for a channel\n- /api/context?query=text&channel=CHANNEL_ID - Get relevant context for a query\n\nWhen users ask about:\n- \"What happened in #engineering today?\" → Use /api/recent with the channel ID\n- \"Search for discussions about the new feature\" → Use /api/search\n- \"Summarize activity in #general this week\" → Use /api/summary with hours=168\n- \"What were people saying about the deployment?\" → Use /api/search with relevant keywords\n\nAlways provide helpful, contextual responses based on the actual Slack data. Format responses in a clear, readable way and include relevant timestamps when useful.",
+  "conversation_starters": [
+    "What's been happening in my workspace today?",
+    "Search for recent discussions about our project",
+    "Summarize activity in #general this week",
+    "Show me messages mentioning 'deployment' or 'release'"
+  ],
+  "capabilities": {
+    "web_browsing": false,
+    "dalle_image_generation": false,
+    "code_interpreter": false
+  },
+  "actions": [
+    {
+      "type": "function",
+      "function": {
+        "name": "search_slack_messages",
+        "description": "Search for messages in the Slack workspace containing specific text",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "The text to search for in messages"
+            },
+            "hours": {
+              "type": "number",
+              "description": "Number of hours to look back (default: 24)",
+              "default": 24
+            },
+            "limit": {
+              "type": "number", 
+              "description": "Maximum number of results to return (default: 50)",
+              "default": 50
+            }
+          },
+          "required": ["query"]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_recent_messages",
+        "description": "Get recent messages from a specific channel or all channels",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "channel": {
+              "type": "string",
+              "description": "Channel ID to get messages from (optional, omit for all channels)"
+            },
+            "hours": {
+              "type": "number",
+              "description": "Number of hours to look back (default: 24)",
+              "default": 24
+            },
+            "limit": {
+              "type": "number",
+              "description": "Maximum number of messages to return (default: 100)",
+              "default": 100
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function", 
+      "function": {
+        "name": "get_channel_summary",
+        "description": "Get summary statistics and recent activity for a specific channel",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "channel": {
+              "type": "string",
+              "description": "Channel ID to summarize"
+            },
+            "hours": {
+              "type": "number",
+              "description": "Number of hours to summarize (default: 24)",
+              "default": 24
+            }
+          },
+          "required": ["channel"]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_context_for_query",
+        "description": "Get relevant context and recent messages for a specific query",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string", 
+              "description": "The query to get context for"
+            },
+            "channel": {
+              "type": "string",
+              "description": "Optional channel ID to focus the search"
+            }
+          },
+          "required": ["query"]
+        }
+      }
+    }
+  ],
+  "api_base_url": "http://localhost:3001"
+}

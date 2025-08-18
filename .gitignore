@@ -1,6 +1,10 @@
 # Environment variables
 .env
 
+# Database files
+slack_data.db
+*.db
+
 # Node modules
 node_modules/
 

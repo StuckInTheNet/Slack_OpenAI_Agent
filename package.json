@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "setup": "node -e \"console.log('1. Copy .env.example to .env\\n2. Fill in your API keys\\n3. Run npm start\\n4. Invite bot to Slack channels\\n5. Set up OpenAI Custom GPT')\""
   },
   "keywords": [],
   "author": "",
@@ -13,7 +14,11 @@
   "description": "A Slack bot that integrates with OpenAI's GPT API",
   "dependencies": {
     "@slack/bolt": "^4.4.0",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.1",
-    "openai": "^5.12.2"
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "openai": "^5.12.2",
+    "sqlite3": "^5.1.7"
   }
 }
