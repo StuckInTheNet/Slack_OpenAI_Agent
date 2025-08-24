@@ -2,6 +2,8 @@
 
 **Your team's AI assistant that keeps your data private and under YOUR control**
 
+> 🚨 **SETUP NOT WORKING?** → Read **[SETUP-HELP.md](./SETUP-HELP.md)** for step-by-step troubleshooting!
+
 ## Why This Bot? The Problem It Solves 🎯
 
 Ever wished you could:
@@ -156,22 +158,46 @@ We're working on ready-to-run apps for Windows and Mac that will:
 
 ### The Easiest Way - Interactive Setup:
 
-After downloading (using any method above), run the setup wizard:
+**IMPORTANT**: You need to download the bot first before running the wizard!
 
-**Windows:** Double-click `setup-windows.bat`
+### Step 1: Download the Bot
+Choose one of these methods:
+- **Easy**: [Download ZIP](https://github.com/StuckInTheNet/Slack_OpenAI_Agent/archive/refs/heads/master.zip) → Unzip it
+- **Advanced**: `git clone https://github.com/StuckInTheNet/Slack_OpenAI_Agent.git`
 
-**Mac/Linux:** Double-click `setup-mac.sh` (or run `./setup-mac.sh` in Terminal)
+### Step 2: Install Node.js (if you don't have it)
+- **Download**: Go to [nodejs.org](https://nodejs.org) → Download → Install
 
-**Any system:** Run `node setup-wizard.js`
+### Step 3: Run the Setup Wizard
 
-The wizard will:
-- ✅ Check if everything is installed correctly
-- ✅ Walk you through getting your API keys
-- ✅ Create your configuration file automatically
-- ✅ Test that everything works
-- ✅ Start the bot for you
+**🖥️ Windows Users:**
+1. Open the downloaded folder (`Slack_OpenAI_Agent-master`)
+2. **Double-click** `setup-windows.bat`
+3. If it doesn't work, try: Hold Shift → Right-click in folder → "Open PowerShell" → Type: `node setup-wizard.js`
 
-**This is the recommended method for non-technical users!**
+**🍎 Mac Users:**
+1. Open the downloaded folder (`Slack_OpenAI_Agent-master`)
+2. **Double-click** `setup-mac.sh`
+3. If it asks for permission: Right-click → "Open" → Click "Open" again
+4. If it doesn't work: Open Terminal → Type `cd ` → Drag the folder into Terminal → Press Enter → Type `node setup-wizard.js`
+
+**🐧 Linux Users:**
+```bash
+cd Slack_OpenAI_Agent-master
+chmod +x setup-mac.sh
+./setup-mac.sh
+```
+
+### What the Wizard Does:
+- ✅ Checks if Node.js is installed
+- ✅ Installs bot dependencies automatically
+- ✅ Walks you through getting Slack tokens (step-by-step)
+- ✅ Walks you through getting OpenAI API key
+- ✅ Creates your `.env` configuration file
+- ✅ Validates all your keys work
+- ✅ Starts the bot automatically
+
+**The wizard will guide you through everything - just follow the prompts!**
 
 ---
 
@@ -506,6 +532,21 @@ npm start
 rm slack_data.db
 npm start
 ```
+
+### "Setup wizard won't start"
+**Windows:**
+- Make sure you're in the right folder (should see `setup-windows.bat`)
+- Try right-click → "Run as administrator"
+- Or: Hold Shift → Right-click → "Open PowerShell" → Type `node setup-wizard.js`
+
+**Mac:**
+- Try right-click on `setup-mac.sh` → "Open" → Click "Open" again
+- Or: Open Terminal → Type `cd ` → Drag folder in → Press Enter → Type `node setup-wizard.js`
+
+**All systems:**
+- Make sure Node.js is installed: Type `node --version` in Terminal/PowerShell
+- Make sure you're in the bot folder (you should see `package.json`)
+- Run `npm install` first, then `node setup-wizard.js`
 
 ## Frequently Asked Questions ❓
 
