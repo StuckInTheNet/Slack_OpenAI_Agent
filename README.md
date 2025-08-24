@@ -2,7 +2,19 @@
 
 **Your team's AI assistant that keeps your data private and under YOUR control**
 
-> 🚨 **SETUP NOT WORKING?** → Read **[SETUP-HELP.md](./SETUP-HELP.md)** for step-by-step troubleshooting!
+---
+
+## 🚀 ALREADY DOWNLOADED? START HERE!
+
+**If you already have the bot files on your computer:**
+
+**→ Double-click the file called: `CLICK-TO-SETUP.html`**
+
+That file will open in your browser and walk you through everything!
+
+**Still stuck?** → Open the file called `SETUP-HELP.md` or `START-HERE.txt`
+
+---
 
 ## Why This Bot? The Problem It Solves 🎯
 
@@ -100,27 +112,41 @@ Think of it as your team's **photographic memory** + **smart assistant**:
 ## 🎯 SIMPLEST METHOD: Just Click One File!
 
 **After you download the bot files:**
-1. **Double-click** → `CLICK-TO-SETUP.html` 
-2. **Follow the visual guide** (works in any web browser)
-3. **Done!** It walks you through everything step-by-step
+1. **Find the file called** → **CLICK-TO-SETUP.html** 
+2. **Double-click it** (opens in your web browser)
+3. **Follow the visual guide** with step-by-step instructions
+4. **Done!** Your bot will be running
 
-*This HTML file works on any computer and shows you exactly what to click and type.*
+*This HTML file is in the same folder as this README and works on any computer.*
+
+## 📁 Important Files in This Folder:
+
+After downloading, you should see these key files:
+- **CLICK-TO-SETUP.html** ← Double-click this for visual setup guide
+- **START-HERE.txt** ← Read this if you're completely lost
+- **SETUP-HELP.md** ← Troubleshooting guide
+- **setup-windows.bat** ← Windows users can try double-clicking this
+- **setup-mac.sh** ← Mac users can try double-clicking this
+- **README.md** ← The file you're reading now
+- **package.json** ← Technical file (don't edit)
+
+**Can't see these files?** You might need to download/unzip the bot first!
 
 ## Quick Start (15 Minutes) ⚡
 
 ### Choose Your Installation Method:
 
 **🟢 SUPER EASY - No Technical Knowledge Required:**
-- [**CLICK-TO-SETUP.html**](./CLICK-TO-SETUP.html) ← **CLICK THIS FILE** after downloading!
-- [Setup Wizard Method](#setup-wizard-method-recommended) (for reference)
-- [Download ZIP Method](#download-zip-method) (download first)
+- **Double-click CLICK-TO-SETUP.html** ← This file opens in your browser with visual instructions
+- **Or try the setup wizard** (scroll down to "Setup Wizard Method")
+- **Need to download first?** (scroll down to "Download ZIP Method")
 
 **🟡 EASY - Copy & Paste:**
-- [Terminal Commands](#terminal-method-copy--paste) (git clone method)
+- **Terminal Commands** (scroll down to "Terminal Method")
 
 **🔴 ADVANCED - For Developers:**
-- [Docker Method](#docker-method-one-command) (containers)
-- [Professional Setup](#for-non-technical-teams-we-can-set-it-up-for-you) (we do it for you)
+- **Docker Method** (scroll down to "Docker Method") 
+- **Professional Setup** (scroll down to "Professional Setup Service")
 
 ---
 
