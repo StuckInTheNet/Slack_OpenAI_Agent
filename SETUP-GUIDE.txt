@@ -1,0 +1,127 @@
+🚀 SLACK AI BOT - SETUP GUIDE
+=============================
+
+Welcome! Let's get your AI assistant running in 15 minutes.
+
+📋 WHAT YOU NEED:
+- A Slack workspace (free or paid)
+- An OpenAI account (free to create)
+- Node.js installed (we'll help you get this)
+
+🎯 STEP 1: INSTALL NODE.JS (5 minutes)
+=====================================
+
+Node.js is what runs the bot. It's free and safe.
+
+→ Go to: https://nodejs.org
+→ Download the version for your computer
+→ Install it (just click through the installer)
+
+Test if it worked:
+• Windows: Press Windows key + R, type "powershell", press Enter
+• Mac: Press Cmd + Space, type "terminal", press Enter
+
+Then type: node --version
+You should see something like: v18.17.0
+
+🎯 STEP 2: RUN THE SETUP WIZARD (5 minutes)
+===========================================
+
+Now we'll run an interactive setup that does everything for you.
+
+In the same Terminal/PowerShell window from above:
+
+1. Type: cd 
+2. Drag this folder (the one with all the bot files) into the window
+3. Press Enter
+4. Type: npm install
+5. Wait for it to finish
+6. Type: node setup-wizard.js
+
+The wizard will now ask you questions and help you get:
+✅ Your Slack bot token
+✅ Your OpenAI API key  
+✅ Everything configured properly
+
+Just follow the prompts - it will tell you exactly what to do!
+
+🎯 STEP 3: GET YOUR SLACK TOKENS (from the wizard)
+===================================================
+
+The wizard will guide you through this, but here's what it does:
+
+1. Takes you to: https://api.slack.com/apps
+2. Helps you create a new Slack app
+3. Walks you through getting the right permissions
+4. Gets your bot token and signing secret
+
+🎯 STEP 4: GET YOUR OPENAI KEY (from the wizard)
+=================================================
+
+1. Takes you to: https://platform.openai.com/api-keys
+2. Helps you create an account if needed
+3. Shows you how to create an API key
+4. Usually costs $1-5/month for normal use
+
+🎯 STEP 5: START YOUR BOT! (automatic)
+======================================
+
+The wizard will:
+✅ Test all your keys work
+✅ Start the bot automatically
+✅ Show you how to invite it to channels
+✅ Give you example questions to ask
+
+🛠️ TROUBLESHOOTING
+==================
+
+"I can't find Terminal/PowerShell"
+→ Windows: Right-click in this folder while holding Shift → "Open PowerShell"
+→ Mac: Applications → Terminal, then drag this folder in
+
+"node --version gives an error" 
+→ Node.js didn't install properly. Try downloading again from nodejs.org
+
+"npm install gives errors"
+→ Make sure you're in the right folder (you should see package.json)
+→ Try: npm cache clean --force, then npm install again
+
+"The wizard won't start"
+→ Make sure you typed: node setup-wizard.js (not just setup-wizard.js)
+→ Make sure you're in the bot folder
+
+"I'm completely stuck"
+→ Read SETUP-HELP.md for more detailed troubleshooting
+→ Ask for help: https://github.com/StuckInTheNet/Slack_OpenAI_Agent/issues
+
+🎉 WHAT HAPPENS NEXT?
+=====================
+
+Once your bot is running:
+
+1. Invite it to a Slack channel: /invite @YourBotName
+2. Ask it questions like:
+   • @YourBot who talked the most today?
+   • @YourBot summarize the last 2 hours
+   • @YourBot find messages about the project
+
+3. Try slash commands:
+   • /ai-summary - get a quick summary
+   • /ai-search pizza - find all messages about pizza
+   • /ai-help - see what else it can do
+
+Your AI assistant is now ready to help your team! 🤖
+
+💡 CUSTOMIZATION
+================
+
+Want to change your bot's name or personality?
+→ Check the "Customizing Your Bot" section in README.md
+
+Need help? All the files in this folder have different types of help:
+• START-HERE.txt - Super basic instructions
+• SETUP-HELP.md - Detailed troubleshooting  
+• README.md - Complete documentation
+• This file - Step-by-step setup guide
+
+You've got this! 🚀

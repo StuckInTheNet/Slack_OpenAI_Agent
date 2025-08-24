@@ -8,11 +8,14 @@
 
 **If you already have the bot files on your computer:**
 
-**→ Double-click the file called: `CLICK-TO-SETUP.html`**
+**→ Open the file called: `SETUP-GUIDE.txt`**
 
-That file will open in your browser and walk you through everything!
+This is a simple text file you can read in any text editor with step-by-step instructions!
 
-**Still stuck?** → Open the file called `SETUP-HELP.md` or `START-HERE.txt`
+**Alternatives:**
+- `CLICK-TO-SETUP.html` - Visual browser guide (if you prefer web pages)
+- `START-HERE.txt` - Super simple version
+- `SETUP-HELP.md` - Detailed troubleshooting
 
 ---
 
@@ -122,11 +125,12 @@ Think of it as your team's **photographic memory** + **smart assistant**:
 ## 📁 Important Files in This Folder:
 
 After downloading, you should see these key files:
-- **CLICK-TO-SETUP.html** ← Double-click this for visual setup guide
-- **START-HERE.txt** ← Read this if you're completely lost
-- **SETUP-HELP.md** ← Troubleshooting guide
-- **setup-windows.bat** ← Windows users can try double-clicking this
-- **setup-mac.sh** ← Mac users can try double-clicking this
+- **SETUP-GUIDE.txt** ← **START HERE** - Complete setup instructions in plain text
+- **START-HERE.txt** ← Super simple version if you're lost
+- **CLICK-TO-SETUP.html** ← Visual web guide (if you prefer browsers)
+- **SETUP-HELP.md** ← Detailed troubleshooting 
+- **setup-windows.bat** ← Windows automated setup (may not work on all systems)
+- **setup-mac.sh** ← Mac automated setup (may need permissions)
 - **README.md** ← The file you're reading now
 - **package.json** ← Technical file (don't edit)
 
@@ -137,8 +141,8 @@ After downloading, you should see these key files:
 ### Choose Your Installation Method:
 
 **🟢 SUPER EASY - No Technical Knowledge Required:**
-- **Double-click CLICK-TO-SETUP.html** ← This file opens in your browser with visual instructions
-- **Or try the setup wizard** (scroll down to "Setup Wizard Method")
+- **Open SETUP-GUIDE.txt** ← Easy-to-read text file with complete instructions
+- **Or open CLICK-TO-SETUP.html** ← Visual browser guide
 - **Need to download first?** (scroll down to "Download ZIP Method")
 
 **🟡 EASY - Copy & Paste:**
