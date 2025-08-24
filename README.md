@@ -478,6 +478,88 @@ max_tokens: 2000  // Longer
 const cache = new NodeCache({ stdTTL: 600 }); // 10 minutes
 ```
 
+## Customizing Your Bot 🎨
+
+### Change the Bot's Name and Avatar
+
+1. **Go to your Slack app**: [api.slack.com/apps](https://api.slack.com/apps)
+2. **Select your bot app**
+3. **Click "App Home"** in the sidebar
+4. **Edit these fields**:
+   - **Display Name**: What people see (e.g., "Team AI Assistant")
+   - **Default Username**: The @username (e.g., "ai-helper")
+5. **Upload an avatar**: Click "Upload Image" for a custom bot icon
+6. **Click "Save"**
+
+### Change the Bot's Personality
+
+Edit `index-enhanced.js` around line 177:
+
+```javascript
+{
+  role: "system",
+  content: "You are a helpful Slack assistant..." // ← Change this!
+}
+```
+
+**Example personalities**:
+
+```javascript
+// Professional Assistant
+"You are a professional business assistant. Be concise, helpful, and formal."
+
+// Friendly Helper  
+"You are a friendly team member. Use casual language and be supportive!"
+
+// Data Expert
+"You are a data analyst. Focus on facts, numbers, and insights."
+
+// Creative Assistant
+"You are a creative brainstorming partner. Think outside the box!"
+```
+
+### Change Response Style
+
+In the same file, modify these parameters:
+
+```javascript
+// More focused responses
+temperature: 0.2
+
+// More creative responses  
+temperature: 0.9
+
+// Shorter responses
+max_tokens: 500
+
+// Longer, detailed responses
+max_tokens: 2000
+```
+
+### Add Custom Commands
+
+Add new slash commands in the Slack app settings:
+
+1. **Go to "Slash Commands"** in your Slack app
+2. **Click "Create New Command"**
+3. **Add custom commands** like:
+   - `/team-status` - Get team activity
+   - `/daily-brief` - Morning summary
+   - `/mood-check` - Team sentiment
+
+Then add the handlers in your code!
+
+### Change the Bot's Greeting
+
+Edit the welcome message when someone first talks to the bot:
+
+```javascript
+// In index-enhanced.js, add a greeting detector
+if (text.toLowerCase().includes('hello') || text.toLowerCase().includes('hi')) {
+  // Add custom greeting logic
+}
+```
+
 ## Real ROI Examples 💵
 
 ### Small Startup (10 people)
@@ -580,6 +662,17 @@ A: Yes! Edit the system prompts in the code.
 
 **Q: What if OpenAI goes down?**
 A: The bot stops answering but your data is safe.
+
+**Q: How do I change my bot's name?**
+A: The bot name is set in your Slack app configuration:
+1. Go to [api.slack.com/apps](https://api.slack.com/apps)
+2. Select your app
+3. Click "App Home" in the sidebar
+4. Edit the "Display Name" field
+5. Click "Save"
+
+**Q: How do I change what the bot says about itself?**
+A: Edit the system prompt in your bot's code (around line 177 in `index-enhanced.js`).
 
 ## Contributing & Support 🤝
 
