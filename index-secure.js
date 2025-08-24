@@ -5,6 +5,11 @@ const Database = require('./database-fixed');
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
+const crypto = require('crypto');
+
+// Security Configuration
+const API_KEY = process.env.API_SECRET_KEY || crypto.randomBytes(32).toString('hex');
+const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : ['http://localhost:3000'];
 
 // Initialize Database
 const database = new Database();
@@ -14,11 +19,97 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-// Initialize Express server for API
+// Initialize Express server for API with security
 const apiApp = express();
-apiApp.use(helmet());
-apiApp.use(cors());
-apiApp.use(express.json());
+
+// Security middleware
+apiApp.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      scriptSrc: ["'self'"],
+      imgSrc: ["'self'", "data:", "https:"],
+    },
+  },
+  hsts: {
+    maxAge: 31536000,
+    includeSubDomains: true,
+    preload: true
+  }
+}));
+
+// CORS configuration
+apiApp.use(cors({
+  origin: function(origin, callback) {
+    if (!origin || ALLOWED_ORIGINS.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
+
+apiApp.use(express.json({ limit: '1mb' })); // Limit payload size
+
+// Rate limiting
+const rateLimits = new Map();
+function rateLimit(maxRequests = 100, windowMs = 60000) {
+  return (req, res, next) => {
+    const ip = req.ip || req.connection.remoteAddress;
+    const now = Date.now();
+    const userLimits = rateLimits.get(ip) || { count: 0, resetTime: now + windowMs };
+    
+    if (now > userLimits.resetTime) {
+      userLimits.count = 0;
+      userLimits.resetTime = now + windowMs;
+    }
+    
+    userLimits.count++;
+    
+    if (userLimits.count > maxRequests) {
+      return res.status(429).json({ 
+        error: 'Too many requests',
+        retryAfter: Math.ceil((userLimits.resetTime - now) / 1000)
+      });
+    }
+    
+    rateLimits.set(ip, userLimits);
+    next();
+  };
+}
+
+// API Authentication middleware
+function authenticateAPI(req, res, next) {
+  const apiKey = req.headers['x-api-key'];
+  
+  if (!apiKey) {
+    return res.status(401).json({ error: 'API key required' });
+  }
+  
+  if (apiKey !== API_KEY) {
+    // Log failed authentication attempt
+    console.warn(`Failed API authentication from IP: ${req.ip}`);
+    return res.status(401).json({ error: 'Invalid API key' });
+  }
+  
+  next();
+}
+
+// Input validation middleware
+function validateInput(req, res, next) {
+  // Sanitize query parameters
+  if (req.query) {
+    for (const key in req.query) {
+      if (typeof req.query[key] === 'string') {
+        // Remove any potential SQL injection attempts
+        req.query[key] = req.query[key].replace(/[;'"\\]/g, '');
+      }
+    }
+  }
+  next();
+}
 
 // Initialize Slack app
 const app = new App({
@@ -201,8 +292,11 @@ app.event('app_mention', async ({ event, context, client, say }) => {
   }
 });
 
-// API Routes for OpenAI interface
-apiApp.get('/api/search', async (req, res) => {
+// API Routes with authentication
+// Create security middleware chain
+const secureAPI = [rateLimit(100, 60000), authenticateAPI, validateInput];
+
+apiApp.get('/api/search', ...secureAPI, async (req, res) => {
   try {
     const { query, hours = 24, limit = 50 } = req.query;
     
@@ -218,7 +312,7 @@ apiApp.get('/api/search', async (req, res) => {
   }
 });
 
-apiApp.get('/api/recent', async (req, res) => {
+apiApp.get('/api/recent', ...secureAPI, async (req, res) => {
   try {
     const { channel, hours = 24, limit = 100 } = req.query;
     const messages = await database.getRecentMessages(channel, parseInt(hours), parseInt(limit));
@@ -229,7 +323,7 @@ apiApp.get('/api/recent', async (req, res) => {
   }
 });
 
-apiApp.get('/api/summary', async (req, res) => {
+apiApp.get('/api/summary', ...secureAPI, async (req, res) => {
   try {
     const { channel, hours = 24 } = req.query;
     
@@ -247,7 +341,7 @@ apiApp.get('/api/summary', async (req, res) => {
   }
 });
 
-apiApp.get('/api/context', async (req, res) => {
+apiApp.get('/api/context', ...secureAPI, async (req, res) => {
   try {
     const { query, channel } = req.query;
     
@@ -263,8 +357,8 @@ apiApp.get('/api/context', async (req, res) => {
   }
 });
 
-// Health check endpoint
-apiApp.get('/api/health', (req, res) => {
+// Health check endpoint (no auth required for monitoring)
+apiApp.get('/health', (req, res) => {
   res.json({ status: 'healthy', timestamp: new Date().toISOString() });
 });
 
@@ -279,10 +373,14 @@ apiApp.get('/api/health', (req, res) => {
     await app.start();
     console.log('⚡️ Slack bot is running!');
     
-    // Start API server
+    // Start API server - ONLY on localhost for security
     const apiPort = process.env.API_PORT || 3001;
-    apiApp.listen(apiPort, () => {
-      console.log(`🚀 API server running on port ${apiPort}`);
+    apiApp.listen(apiPort, '127.0.0.1', () => {
+      console.log(`🚀 API server running on localhost:${apiPort}`);
+      console.log(`🔐 API Key: ${API_KEY}`);
+      if (!process.env.API_SECRET_KEY) {
+        console.log('⚠️  Add this to your .env file: API_SECRET_KEY=' + API_KEY);
+      }
     });
     
   } catch (error) {
@@ -296,4 +394,15 @@ process.on('SIGINT', async () => {
   console.log('\n🛑 Shutting down gracefully...');
   await database.close();
   process.exit(0);
+});
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught Exception:', error);
+  process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  process.exit(1);
 });

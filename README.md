@@ -1,6 +1,25 @@
-# Slack-OpenAI Bot
+# Slack-OpenAI Agent 🤖
 
-A Slack bot that integrates with OpenAI's GPT API to provide AI-powered responses in your Slack workspace.
+An intelligent Slack bot that integrates with OpenAI's GPT models to provide context-aware responses, analytics, and automated insights for your Slack workspace.
+
+## ✨ Features
+
+### Core Capabilities
+- **AI-Powered Responses**: Uses OpenAI GPT-3.5/GPT-4 for intelligent conversation
+- **Message History**: Stores and searches through Slack conversation history
+- **Context Awareness**: Provides relevant context from past messages
+- **User Analytics**: Track user activity and engagement metrics
+- **Smart Search**: Advanced message search with relevance scoring
+
+### Enhanced Features (v2.0)
+- **Intent Detection**: Automatically understands query types
+- **Natural Language Time Parsing**: "last 3 hours", "yesterday", etc.
+- **Slash Commands**: Quick access to summaries, search, and reports
+- **Scheduled Reports**: Automated daily channel summaries
+- **Sentiment Analysis**: Track channel mood and tone
+- **Thread Tracking**: Better conversation threading support
+- **Data Export**: Export conversation data as CSV or JSON
+- **Performance Caching**: 5-minute cache for frequently accessed data
 
 ## Setup Instructions
 
@@ -77,25 +96,54 @@ npm install
 npm start
 ```
 
-## Usage
+## 💬 Usage
 
-- **Mention the bot**: `@YourBotName What is the weather like?`
-- **Direct message**: Send a DM to the bot
-- **In channels**: The bot will respond when mentioned
+### Slash Commands
+- `/ai-summary [hours]` - Get channel activity summary
+- `/ai-search <query>` - Search through message history
+- `/ai-report [type]` - Generate analytics report
+- `/ai-help` - Show available commands
 
-## Features
+### Mention the Bot
+- **Ask questions**: `@YourBot who talked the most today?`
+- **Get summaries**: `@YourBot summarize the last 3 hours`
+- **Search messages**: `@YourBot find messages about the project`
+- **Analyze sentiment**: `@YourBot what's the mood in the channel?`
 
-- Responds to mentions and direct messages
-- Uses GPT-3.5-turbo for responses
-- Thread support for conversations
-- Error handling
+### API Endpoints
+The bot includes a REST API on port 3001:
+- `GET /api/search?query=<term>` - Search messages
+- `GET /api/recent?hours=24` - Get recent messages
+- `GET /api/analytics?channel=<id>` - Channel analytics
+- `GET /api/export?format=csv` - Export data
+- `GET /api/health` - System health check
 
-## Customization
+## 🔒 Security Notes
 
-You can modify the OpenAI parameters in `index.js`:
-- `model`: Change to use different GPT models (e.g., "gpt-4")
-- `max_tokens`: Adjust response length
-- `temperature`: Control creativity (0-1, higher = more creative)
+⚠️ **Important Security Considerations:**
+- Never commit `.env` files to version control
+- Rotate API keys regularly
+- Use environment variables for all secrets
+- The bot stores message data - ensure compliance with your organization's data policies
+- Enable rate limiting in production environments
+
+## 🛠️ Development
+
+### Running Different Versions
+```bash
+npm start              # Enhanced v2.0 with all features
+npm run start:original # Original v1.0 basic version
+```
+
+### Customization
+
+You can modify the OpenAI parameters in `.env`:
+- `OPENAI_MODEL`: Use "gpt-4-turbo-preview" or "gpt-3.5-turbo"
+
+In the code (`index-enhanced.js`):
+- `max_tokens`: Adjust response length (default: 1500)
+- `temperature`: Control creativity (0-1, default: 0.7)
+- `CACHE_TTL`: Cache duration in seconds (default: 300)
 
 ## Troubleshooting
 
