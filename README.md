@@ -77,7 +77,7 @@ Think of it as your team's **photographic memory** + **smart assistant**:
 
 **🟢 OPTION 1 - Have Your IT Person Do It (30 minutes)**
 - Send them this link: https://github.com/StuckInTheNet/Slack_OpenAI_Agent
-- They run the [setup wizard](#setup-wizard-method-recommended) 
+- They download it and click on `CLICK-TO-SETUP.html` 
 - Total time: 30 minutes, Cost: $0
 
 **🟡 OPTION 2 - Hire Someone ($100-300)**
@@ -97,13 +97,23 @@ Think of it as your team's **photographic memory** + **smart assistant**:
 3. **An OpenAI API account** (pay-as-you-go, ~$1-5/month)
 4. **A computer or server** to run the bot
 
+## 🎯 SIMPLEST METHOD: Just Click One File!
+
+**After you download the bot files:**
+1. **Double-click** → `CLICK-TO-SETUP.html` 
+2. **Follow the visual guide** (works in any web browser)
+3. **Done!** It walks you through everything step-by-step
+
+*This HTML file works on any computer and shows you exactly what to click and type.*
+
 ## Quick Start (15 Minutes) ⚡
 
 ### Choose Your Installation Method:
 
 **🟢 SUPER EASY - No Technical Knowledge Required:**
-- [Setup Wizard Method](#setup-wizard-method-recommended) (double-click setup files)
-- [Download ZIP Method](#download-zip-method) (just download and double-click)
+- [**CLICK-TO-SETUP.html**](./CLICK-TO-SETUP.html) ← **CLICK THIS FILE** after downloading!
+- [Setup Wizard Method](#setup-wizard-method-recommended) (for reference)
+- [Download ZIP Method](#download-zip-method) (download first)
 
 **🟡 EASY - Copy & Paste:**
 - [Terminal Commands](#terminal-method-copy--paste) (git clone method)

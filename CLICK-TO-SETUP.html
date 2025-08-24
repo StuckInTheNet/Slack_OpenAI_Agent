@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slack AI Bot Setup</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .step {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        .step h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+        .code {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .platform-tabs {
+            display: flex;
+            margin: 20px 0;
+        }
+        .tab {
+            background: #e9ecef;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+        }
+        .tab.active {
+            background: #007bff;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 0 5px 5px 5px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .button {
+            background: #28a745;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .button:hover {
+            background: #218838;
+        }
+        .button.secondary {
+            background: #6c757d;
+        }
+        .button.secondary:hover {
+            background: #545b62;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Slack AI Bot Setup</h1>
+            <p>Let's get your bot running in 5 minutes!</p>
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Before we start:</strong> Make sure you downloaded and unzipped the bot files. You should see files like <code>package.json</code> and <code>setup-wizard.js</code> in this folder.
+        </div>
+
+        <div class="step">
+            <h3>Step 1: Install Node.js (if you don't have it)</h3>
+            <p>Node.js is what runs the bot. It's free and safe.</p>
+            <a href="https://nodejs.org" target="_blank" class="button">Download Node.js</a>
+            <p>Download it, install it, then come back here.</p>
+            
+            <p><strong>Test if it worked:</strong></p>
+            <div class="platform-tabs">
+                <div class="tab active" onclick="showTab('windows')">Windows</div>
+                <div class="tab" onclick="showTab('mac')">Mac</div>
+            </div>
+            
+            <div id="windows" class="tab-content active">
+                <p>1. Press <kbd>Windows Key + R</kbd></p>
+                <p>2. Type <code>powershell</code> and press Enter</p>
+                <p>3. Type this and press Enter:</p>
+                <div class="code">node --version</div>
+                <p>You should see something like <code>v18.17.0</code></p>
+            </div>
+            
+            <div id="mac" class="tab-content">
+                <p>1. Press <kbd>Cmd + Space</kbd></p>
+                <p>2. Type <code>terminal</code> and press Enter</p>
+                <p>3. Type this and press Enter:</p>
+                <div class="code">node --version</div>
+                <p>You should see something like <code>v18.17.0</code></p>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Step 2: Run the Setup Wizard</h3>
+            <p>Now we'll run the interactive setup that walks you through everything.</p>
+            
+            <div class="platform-tabs">
+                <div class="tab active" onclick="showTab('setup-windows')">Windows</div>
+                <div class="tab" onclick="showTab('setup-mac')">Mac</div>
+            </div>
+            
+            <div id="setup-windows" class="tab-content active">
+                <p><strong>Method 1 (Easiest):</strong></p>
+                <p>1. Hold <kbd>Shift</kbd> and right-click in this folder</p>
+                <p>2. Click "Open PowerShell window here"</p>
+                <p>3. Copy and paste this command:</p>
+                <div class="code">node setup-wizard.js</div>
+                
+                <p><strong>Method 2 (If that doesn't work):</strong></p>
+                <p>1. Press <kbd>Windows Key + R</kbd></p>
+                <p>2. Type <code>powershell</code> and press Enter</p>
+                <p>3. Type <code>cd </code> (with a space), then drag this folder into the window</p>
+                <p>4. Press Enter, then type:</p>
+                <div class="code">node setup-wizard.js</div>
+            </div>
+            
+            <div id="setup-mac" class="tab-content">
+                <p><strong>Method 1 (Easiest):</strong></p>
+                <p>1. Press <kbd>Cmd + Space</kbd></p>
+                <p>2. Type <code>terminal</code> and press Enter</p>
+                <p>3. Type <code>cd </code> (with a space), then drag this folder into Terminal</p>
+                <p>4. Press Enter, then type:</p>
+                <div class="code">node setup-wizard.js</div>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Step 3: Follow the Wizard</h3>
+            <p>The setup wizard will:</p>
+            <ul>
+                <li>✅ Check everything is working</li>
+                <li>✅ Install what the bot needs</li>
+                <li>✅ Walk you through getting your Slack tokens</li>
+                <li>✅ Walk you through getting your OpenAI key</li>
+                <li>✅ Test everything works</li>
+                <li>✅ Start your bot!</li>
+            </ul>
+            
+            <p><strong>Just follow the prompts - it will tell you exactly what to do!</strong></p>
+        </div>
+
+        <div class="success">
+            <h3>🎉 Still Stuck?</h3>
+            <p>If nothing is working, try this manual method:</p>
+            <ol>
+                <li>Open Terminal/PowerShell in this folder (methods above)</li>
+                <li>Type: <code>npm install</code> and press Enter</li>
+                <li>Wait for it to finish</li>
+                <li>Type: <code>node setup-wizard.js</code> and press Enter</li>
+                <li>Follow the prompts!</li>
+            </ol>
+            
+            <p><strong>Need more help?</strong></p>
+            <a href="https://github.com/StuckInTheNet/Slack_OpenAI_Agent/issues" target="_blank" class="button secondary">Ask for Help</a>
+            <a href="./SETUP-HELP.md" class="button secondary">Read Troubleshooting Guide</a>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Highlight selected tab
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
