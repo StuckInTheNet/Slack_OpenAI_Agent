@@ -74,7 +74,7 @@ Think of it as your team's **photographic memory** + **smart assistant**:
 ## For Busy Managers: 3 Options to Get This Running 🎯
 
 **🟢 OPTION 1 - Have Your IT Person Do It (30 minutes)**
-- Send them this link: https://github.com/Stuckinthenet/slack-openai-agent
+- Send them this link: https://github.com/StuckInTheNet/Slack_OpenAI_Agent
 - They run the [setup wizard](#setup-wizard-method-recommended) 
 - Total time: 30 minutes, Cost: $0
 
@@ -100,34 +100,29 @@ Think of it as your team's **photographic memory** + **smart assistant**:
 ### Choose Your Installation Method:
 
 **🟢 SUPER EASY - No Technical Knowledge Required:**
-- [One-Click Installer](#one-click-installer-easiest) (Windows/Mac app)
+- [Setup Wizard Method](#setup-wizard-method-recommended) (double-click setup files)
 - [Download ZIP Method](#download-zip-method) (just download and double-click)
 
 **🟡 EASY - Copy & Paste:**
-- [Terminal Commands](#terminal-method-copy--paste) (what's shown below)
+- [Terminal Commands](#terminal-method-copy--paste) (git clone method)
 
 **🔴 ADVANCED - For Developers:**
-- [Docker Container](#docker-method) 
-- [Manual Build](#manual-installation)
+- [Docker Method](#docker-method-one-command) (containers)
+- [Professional Setup](#for-non-technical-teams-we-can-set-it-up-for-you) (we do it for you)
 
 ---
 
-## One-Click Installer (Easiest) 🎯
+## One-Click Installer (Coming Soon) 🎯
 
 ### For People Who Just Want It to Work:
 
-**Download the ready-to-run app:**
+We're working on ready-to-run apps for Windows and Mac that will:
+- ✅ Include everything pre-installed
+- ✅ Setup wizard that walks you through API keys
+- ✅ Start automatically with one click
+- ✅ No technical knowledge required
 
-**Windows:** [Download Slack-AI-Bot-Windows.exe](https://github.com/Stuckinthenet/slack-openai-agent/releases/latest/download/slack-ai-bot-windows.exe) (Coming Soon)
-
-**Mac:** [Download Slack-AI-Bot-Mac.app](https://github.com/Stuckinthenet/slack-openai-agent/releases/latest/download/slack-ai-bot-mac.app) (Coming Soon)
-
-1. **Download** the app for your system
-2. **Double-click** to run it
-3. **Follow the setup wizard** (it walks you through getting your Slack and OpenAI keys)
-4. **Done!** The bot starts automatically
-
-*The installer apps are currently in development. Use the ZIP method below for now.*
+**For now, use the [Setup Wizard Method](#setup-wizard-method-recommended) below - it's almost as easy!**
 
 ---
 
@@ -135,7 +130,7 @@ Think of it as your team's **photographic memory** + **smart assistant**:
 
 ### No Git, No Terminal, No Problem:
 
-1. **Download:** Click here → [Download ZIP](https://github.com/Stuckinthenet/slack-openai-agent/archive/refs/heads/master.zip)
+1. **Download:** Click here → [Download ZIP](https://github.com/StuckInTheNet/Slack_OpenAI_Agent/archive/refs/heads/master.zip)
 
 2. **Unzip:** Double-click the downloaded ZIP file
 
@@ -143,7 +138,7 @@ Think of it as your team's **photographic memory** + **smart assistant**:
    - **Windows:** Download from [nodejs.org](https://nodejs.org) → Run the installer
    - **Mac:** Download from [nodejs.org](https://nodejs.org) → Run the installer
 
-4. **Open the folder** (the unzipped `slack-openai-agent-master` folder)
+4. **Open the folder** (the unzipped `Slack_OpenAI_Agent-master` folder)
 
 5. **Windows users:** Hold Shift + Right-click in the folder → "Open PowerShell window here"
    **Mac users:** Double-click `Terminal` in Applications → type `cd ` then drag the folder into Terminal
@@ -186,8 +181,8 @@ The wizard will:
 
 ```bash
 # Copy and paste this into Terminal (Mac) or Command Prompt (Windows)
-git clone https://github.com/Stuckinthenet/slack-openai-agent.git
-cd slack-openai-agent
+git clone https://github.com/StuckInTheNet/Slack_OpenAI_Agent.git
+cd Slack_OpenAI_Agent
 npm install
 ```
 
@@ -275,8 +270,8 @@ In Slack:
 **Option 1: Docker Compose (Recommended)**
 ```bash
 # Download the project
-git clone https://github.com/Stuckinthenet/slack-openai-agent.git
-cd slack-openai-agent
+git clone https://github.com/StuckInTheNet/Slack_OpenAI_Agent.git
+cd Slack_OpenAI_Agent
 
 # Copy and edit your environment file
 cp .env.example .env
@@ -292,7 +287,7 @@ docker-compose up -d
 mkdir slack-bot && cd slack-bot
 
 # Create your .env file
-curl -o .env.example https://raw.githubusercontent.com/Stuckinthenet/slack-openai-agent/master/.env.example
+curl -o .env.example https://raw.githubusercontent.com/StuckInTheNet/Slack_OpenAI_Agent/master/.env.example
 cp .env.example .env
 
 # Edit .env with your keys, then run:
@@ -320,7 +315,7 @@ If your team wants this bot but doesn't want to deal with the technical setup:
 
 **Cost:** $299 one-time setup fee
 
-**Contact:** [Open an issue](https://github.com/Stuckinthenet/slack-openai-agent/issues) with "Setup Service" in the title
+**Contact:** [Open an issue](https://github.com/StuckInTheNet/Slack_OpenAI_Agent/issues) with "Setup Service" in the title
 
 ### Alternative: Hire a Local Developer
 
