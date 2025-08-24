@@ -71,6 +71,23 @@ Think of it as your team's **photographic memory** + **smart assistant**:
 
 **Save $11,000+ per year for a 100-person team!**
 
+## For Busy Managers: 3 Options to Get This Running 🎯
+
+**🟢 OPTION 1 - Have Your IT Person Do It (30 minutes)**
+- Send them this link: https://github.com/Stuckinthenet/slack-openai-agent
+- They run the [setup wizard](#setup-wizard-method-recommended) 
+- Total time: 30 minutes, Cost: $0
+
+**🟡 OPTION 2 - Hire Someone ($100-300)**
+- Post on Upwork/Fiverr: "Set up Node.js Slack bot from GitHub"
+- Send them this repository link
+- They handle everything remotely
+
+**🔴 OPTION 3 - We Do It For You ($299)**
+- [Contact us](#professional-setup-service-optional) for white-glove setup
+- Includes security configuration and team training
+- 30 days of support included
+
 ## What You Need Before Starting 📋
 
 1. **A Slack workspace** (free or paid)
@@ -80,8 +97,90 @@ Think of it as your team's **photographic memory** + **smart assistant**:
 
 ## Quick Start (15 Minutes) ⚡
 
-### For Non-Technical People:
-We've made this as simple as possible. If you can copy-paste, you can do this!
+### Choose Your Installation Method:
+
+**🟢 SUPER EASY - No Technical Knowledge Required:**
+- [One-Click Installer](#one-click-installer-easiest) (Windows/Mac app)
+- [Download ZIP Method](#download-zip-method) (just download and double-click)
+
+**🟡 EASY - Copy & Paste:**
+- [Terminal Commands](#terminal-method-copy--paste) (what's shown below)
+
+**🔴 ADVANCED - For Developers:**
+- [Docker Container](#docker-method) 
+- [Manual Build](#manual-installation)
+
+---
+
+## One-Click Installer (Easiest) 🎯
+
+### For People Who Just Want It to Work:
+
+**Download the ready-to-run app:**
+
+**Windows:** [Download Slack-AI-Bot-Windows.exe](https://github.com/Stuckinthenet/slack-openai-agent/releases/latest/download/slack-ai-bot-windows.exe) (Coming Soon)
+
+**Mac:** [Download Slack-AI-Bot-Mac.app](https://github.com/Stuckinthenet/slack-openai-agent/releases/latest/download/slack-ai-bot-mac.app) (Coming Soon)
+
+1. **Download** the app for your system
+2. **Double-click** to run it
+3. **Follow the setup wizard** (it walks you through getting your Slack and OpenAI keys)
+4. **Done!** The bot starts automatically
+
+*The installer apps are currently in development. Use the ZIP method below for now.*
+
+---
+
+## Download ZIP Method 📦
+
+### No Git, No Terminal, No Problem:
+
+1. **Download:** Click here → [Download ZIP](https://github.com/Stuckinthenet/slack-openai-agent/archive/refs/heads/master.zip)
+
+2. **Unzip:** Double-click the downloaded ZIP file
+
+3. **Install Node.js** (if you don't have it):
+   - **Windows:** Download from [nodejs.org](https://nodejs.org) → Run the installer
+   - **Mac:** Download from [nodejs.org](https://nodejs.org) → Run the installer
+
+4. **Open the folder** (the unzipped `slack-openai-agent-master` folder)
+
+5. **Windows users:** Hold Shift + Right-click in the folder → "Open PowerShell window here"
+   **Mac users:** Double-click `Terminal` in Applications → type `cd ` then drag the folder into Terminal
+
+6. **Install dependencies:** Copy and paste this:
+   ```bash
+   npm install
+   ```
+
+7. **Continue to Step 2** (Create Your Slack App) below
+
+---
+
+## Setup Wizard Method (Recommended) 🧙‍♂️
+
+### The Easiest Way - Interactive Setup:
+
+After downloading (using any method above), run the setup wizard:
+
+**Windows:** Double-click `setup-windows.bat`
+
+**Mac/Linux:** Double-click `setup-mac.sh` (or run `./setup-mac.sh` in Terminal)
+
+**Any system:** Run `node setup-wizard.js`
+
+The wizard will:
+- ✅ Check if everything is installed correctly
+- ✅ Walk you through getting your API keys
+- ✅ Create your configuration file automatically
+- ✅ Test that everything works
+- ✅ Start the bot for you
+
+**This is the recommended method for non-technical users!**
+
+---
+
+## Terminal Method (Copy & Paste) 💻
 
 ### Step 1: Get the Bot Code (2 minutes)
 
@@ -166,6 +265,80 @@ You'll see: "⚡️ Slack bot is running!"
 In Slack:
 1. Invite bot to a channel: `/invite @YourBot`
 2. Ask something: `@YourBot who talked most today?`
+
+---
+
+## Docker Method (One Command) 🐳
+
+### For People Who Know Docker:
+
+**Option 1: Docker Compose (Recommended)**
+```bash
+# Download the project
+git clone https://github.com/Stuckinthenet/slack-openai-agent.git
+cd slack-openai-agent
+
+# Copy and edit your environment file
+cp .env.example .env
+# Edit .env with your keys
+
+# Start with docker-compose
+docker-compose up -d
+```
+
+**Option 2: Docker Run**
+```bash
+# Create a folder for your bot data
+mkdir slack-bot && cd slack-bot
+
+# Create your .env file
+curl -o .env.example https://raw.githubusercontent.com/Stuckinthenet/slack-openai-agent/master/.env.example
+cp .env.example .env
+
+# Edit .env with your keys, then run:
+docker run -d --name slack-bot \
+  --env-file .env \
+  -v $(pwd)/data:/app/data \
+  -p 3001:3001 \
+  stuckinthenet/slack-openai-agent
+```
+
+---
+
+## For Non-Technical Teams: We Can Set It Up For You! 🤝
+
+### Professional Setup Service (Optional)
+
+If your team wants this bot but doesn't want to deal with the technical setup:
+
+**What we offer:**
+- ✅ Complete setup on your server/computer
+- ✅ Security configuration 
+- ✅ Custom training for your team
+- ✅ 30 days of support
+- ✅ Documentation for your IT team
+
+**Cost:** $299 one-time setup fee
+
+**Contact:** [Open an issue](https://github.com/Stuckinthenet/slack-openai-agent/issues) with "Setup Service" in the title
+
+### Alternative: Hire a Local Developer
+
+Search for "Node.js developer" in your area and show them this repository. Most developers can set this up in 1-2 hours (cost: $100-300).
+
+---
+
+## Video Tutorials (Coming Soon) 📹
+
+We're creating video walkthrough tutorials:
+
+- [ ] **"Complete Setup in 15 Minutes"** - Step-by-step screen recording
+- [ ] **"Windows Installation Guide"** - Specific to Windows users  
+- [ ] **"Mac Installation Guide"** - Specific to Mac users
+- [ ] **"First 10 Questions to Ask Your Bot"** - Getting the most value
+- [ ] **"Advanced Configuration"** - Custom prompts and settings
+
+*Subscribe to repo notifications to get notified when these are ready!*
 
 ## Power User Features 💪
 
