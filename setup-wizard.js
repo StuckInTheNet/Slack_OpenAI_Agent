@@ -153,10 +153,10 @@ Your .env file has been created with your credentials.
 Questions? Check the README or open an issue on GitHub.
 `);
 
-  rl.close();
-  
-  // Try to start the bot
+  // Ask if user wants to start the bot before closing readline
   rl.question('\nWould you like to start the bot now? (y/n): ', (answer) => {
+    rl.close(); // Close readline after getting the answer
+    
     if (answer.toLowerCase().startsWith('y')) {
       console.log('\n🚀 Starting your bot...\n');
       exec('npm start', (error, stdout, stderr) => {
