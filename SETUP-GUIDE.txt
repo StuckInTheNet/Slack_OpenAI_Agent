@@ -52,8 +52,10 @@ The wizard will guide you through this, but here's what it does:
 
 1. Takes you to: https://api.slack.com/apps
 2. Helps you create a new Slack app
-3. Walks you through getting the right permissions
+3. Walks you through adding Bot Token Scopes (see SLACK-SCOPES.md for details)
 4. Gets your bot token and signing secret
+
+❓ Can't find a scope like "users:read"? Skip it - the bot works without it!
 
 🎯 STEP 4: GET YOUR OPENAI KEY (from the wizard)
 =================================================

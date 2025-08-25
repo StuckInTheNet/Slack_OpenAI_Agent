@@ -33,13 +33,13 @@ const questions = [
 1. Go to: https://api.slack.com/apps
 2. Click "Create New App" → "From scratch"
 3. Name it something like "Team AI Assistant"
-4. Click "OAuth & Permissions" → Add these scopes:
+4. Click "OAuth & Permissions" → Add these Bot Token Scopes:
    - app_mentions:read
    - channels:history
    - channels:read
    - chat:write
    - commands
-   - users:read
+   - users:read (if available - skip if not found)
 5. Click "Install to Workspace"
 6. Copy the "Bot User OAuth Token" (starts with xoxb-)
 

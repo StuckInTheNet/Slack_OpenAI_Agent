@@ -83,7 +83,8 @@
 
 ## Support 🆘
 
-**Setup issues?** → `SETUP-HELP.md`
+**Setup issues?** → `SETUP-HELP.md`  
+**Slack scope problems?** → `SLACK-SCOPES.md`  
 **Questions?** → [GitHub Issues](https://github.com/StuckInTheNet/Slack_OpenAI_Agent/issues)
 
 ## For Managers 📊
