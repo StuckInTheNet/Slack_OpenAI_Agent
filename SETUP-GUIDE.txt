@@ -57,6 +57,14 @@ The wizard will guide you through this, but here's what it does:
 
 ❓ Can't find a scope like "users:read"? Skip it - the bot works without it!
 
+IMPORTANT FOR STEP 3 (Socket Mode):
+1. Click "Socket Mode" in sidebar → Toggle it ON
+2. Look for "App-Level Tokens" section (appears after enabling)
+3. Click "Generate Token" in that section
+4. Name it "socket", add "connections:write" scope
+5. Click "Generate" in the popup
+6. Copy the xapp- token
+
 🎯 STEP 4: GET YOUR OPENAI KEY (from the wizard)
 =================================================
 

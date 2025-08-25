@@ -43,3 +43,31 @@ If you can't find `users:read` or another scope:
 → Make sure you have `chat:write`
 
 After adding scopes, click **"Install to Workspace"** to update your bot's permissions.
+
+## 🔌 Socket Mode Setup (Step 3)
+
+After setting up scopes, you need to enable Socket Mode:
+
+1. Click **"Socket Mode"** in the left sidebar
+2. **Toggle it ON** (you'll see "Enable Socket Mode" switch)
+3. After enabling, you'll see **"App-Level Tokens"** section appear
+4. Click **"Generate Token"** button in that section
+5. In the popup:
+   - Name: `socket` (or any name you want)
+   - Scopes: Add `connections:write`
+   - Click **"Generate"**
+6. **Copy the token** (starts with `xapp-`)
+
+## 📸 What You'll See:
+
+**Before enabling Socket Mode:**
+- Just a toggle switch that says "Enable Socket Mode"
+
+**After enabling Socket Mode:**
+- The toggle is ON
+- A new section appears: "App-Level Tokens"
+- A "Generate Token" button in that section
+
+**After clicking "Generate Token":**
+- A popup asking for token name and scopes
+- Another "Generate" button in the popup

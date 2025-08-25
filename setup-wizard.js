@@ -64,10 +64,12 @@ Paste your Signing Secret here: `,
 ⚡ STEP 3: Enable Socket Mode
 
 1. Click "Socket Mode" in the sidebar
-2. Toggle it ON
-3. Click "Generate Token" 
-4. Name it "socket" and add "connections:write" scope
-5. Copy the token (starts with xapp-)
+2. Toggle it ON (you'll see "Enable Socket Mode")
+3. After turning it on, you'll see "App-Level Tokens" section
+4. Click "Generate Token" button in that section
+5. Name it "socket" and add "connections:write" scope
+6. Click "Generate" 
+7. Copy the token (starts with xapp-)
 
 Paste your App Token here: `,
     validate: (input) => input.startsWith('xapp-') || 'Token must start with xapp-'
