@@ -367,17 +367,17 @@ apiApp.get('/health', (req, res) => {
   try {
     // Initialize database
     await database.init();
-    console.log('📊 Database initialized');
+    console.log(' Database initialized');
     
     // Start Slack app
     await app.start();
-    console.log('⚡️ Slack bot is running!');
+    console.log('️ Slack bot is running!');
     
     // Start API server - ONLY on localhost for security
     const apiPort = process.env.API_PORT || 3001;
     apiApp.listen(apiPort, '127.0.0.1', () => {
-      console.log(`🚀 API server running on localhost:${apiPort}`);
-      console.log(`🔐 API Key: ${API_KEY}`);
+      console.log(` API server running on localhost:${apiPort}`);
+      console.log(` API Key: ${API_KEY}`);
       if (!process.env.API_SECRET_KEY) {
         console.log('⚠️  Add this to your .env file: API_SECRET_KEY=' + API_KEY);
       }

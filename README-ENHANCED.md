@@ -1,6 +1,6 @@
 # Enhanced Slack-OpenAI Agent v2.0
 
-## 🚀 New Features
+##  New Features
 
 ### 1. **Enhanced Query Capabilities**
 - **Intent Detection**: Automatically understands query types (summary, search, statistics, sentiment)
@@ -45,7 +45,7 @@
 - **Thread Support**: Maintains conversation context
 - **Error Handling**: Clear, helpful error messages
 
-## 📦 Installation
+##  Installation
 
 1. **Install new dependencies:**
 ```bash
@@ -65,7 +65,7 @@ npm start  # Runs the enhanced version
 npm run start:original  # Run the original version
 ```
 
-## 🔧 Configuration
+##  Configuration
 
 ### Environment Variables
 - `OPENAI_MODEL`: Choose between GPT-4 or GPT-3.5
@@ -73,7 +73,7 @@ npm run start:original  # Run the original version
 - `ENABLE_SCHEDULED_REPORTS`: Enable/disable daily reports
 - `REPORT_SCHEDULE`: Cron expression for report timing
 
-## 📊 API Endpoints
+##  API Endpoints
 
 ### Enhanced Endpoints:
 - `GET /api/analytics` - Comprehensive analytics data
@@ -87,7 +87,7 @@ npm run start:original  # Run the original version
 - `GET /api/summary` - Channel summary
 - `GET /api/context` - Get context for queries
 
-## 🎯 Usage Examples
+##  Usage Examples
 
 ### Natural Language Queries:
 - "Who talked the most in the last 3 hours?"
@@ -104,7 +104,7 @@ npm run start:original  # Run the original version
 /ai-help
 ```
 
-## 🔒 Security Notes
+##  Security Notes
 
 ⚠️ **IMPORTANT**: Rotate your API keys immediately if they've been exposed. The keys in your .env file should be regenerated:
 
@@ -144,7 +144,7 @@ npm run start:original  # Original version
 2. Rebuild indexes: Delete and recreate database
 3. Adjust cache TTL in environment variables
 
-## 📝 Changelog
+##  Changelog
 
 ### v2.0.0
 - Added intent detection and smart context

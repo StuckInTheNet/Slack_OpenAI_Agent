@@ -102,10 +102,10 @@ async function getEnhancedContext(query, channelId = null, intents = []) {
     if (intents.includes('userStats')) {
       const userCounts = await database.getUserMessageCounts(timeRange);
       if (userCounts.length > 0) {
-        context += '📊 User Activity Statistics:\n';
+        context += ' User Activity Statistics:\n';
         userCounts.forEach((user, index) => {
-          const emoji = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '👤';
-          context += `${emoji} ${user.user_display}: ${user.message_count} messages\n`;
+          const position = index === 0 ? '#1' : index === 1 ? '#2' : index === 2 ? '#3' : '-';
+          context += `${position} ${user.user_display}: ${user.message_count} messages\n`;
         });
         context += '\n';
       }
@@ -114,7 +114,7 @@ async function getEnhancedContext(query, channelId = null, intents = []) {
     if (intents.includes('summary') || intents.includes('report')) {
       const summary = await database.getEnhancedChannelSummary(channelId, timeRange);
       if (summary) {
-        context += '📋 Channel Summary:\n';
+        context += ' Channel Summary:\n';
         context += `• Total Messages: ${summary.message_count}\n`;
         context += `• Active Users: ${summary.unique_users}\n`;
         context += `• Peak Hour: ${summary.peak_hour || 'N/A'}\n`;
@@ -169,15 +169,15 @@ async function getEnhancedContext(query, channelId = null, intents = []) {
 function formatSlackResponse(text, type = 'default') {
   const formats = {
     summary: {
-      prefix: '📊 *Summary Report*\n',
+      prefix: ' *Summary Report*\n',
       style: 'section'
     },
     search: {
-      prefix: '🔍 *Search Results*\n',
+      prefix: ' *Search Results*\n',
       style: 'list'
     },
     help: {
-      prefix: '❓ *Help & Commands*\n',
+      prefix: '*Help & Commands*\n',
       style: 'code'
     },
     error: {
@@ -301,7 +301,7 @@ async function generateChannelReport(channelId, reportType = 'daily') {
       type: "header",
       text: {
         type: "plain_text",
-        text: `📊 ${reportType.charAt(0).toUpperCase() + reportType.slice(1)} Channel Report`,
+        text: ` ${reportType.charAt(0).toUpperCase() + reportType.slice(1)} Channel Report`,
         emoji: true
       }
     },
@@ -422,15 +422,167 @@ app.message(async ({ message, client }) => {
   }
 });
 
+// Admin command handler
+async function handleAdminCommand(command, event, client, say) {
+  const parts = command.trim().split(' ');
+  const action = parts[0];
+
+  try {
+    switch (action) {
+      case 'join-all':
+        await joinAllChannels(client, say);
+        break;
+      case 'list-channels':
+        await listAllChannels(client, say);
+        break;
+      case 'my-channels':
+        await listBotChannels(client, say);
+        break;
+      case 'leave':
+        const channelToLeave = parts[1];
+        if (channelToLeave) {
+          await leaveChannel(client, say, channelToLeave);
+        } else {
+          await say('Please specify a channel: admin leave #channel-name');
+        }
+        break;
+      default:
+        await say(`Admin commands:
+• \`admin join-all\` - Join all public channels
+• \`admin list-channels\` - List all workspace channels  
+• \`admin my-channels\` - List channels I'm in
+• \`admin leave #channel\` - Leave specific channel`);
+    }
+  } catch (error) {
+    console.error('Admin command error:', error);
+    await say('⚠️ Admin command failed: ' + error.message);
+  }
+}
+
+// Join all available channels
+async function joinAllChannels(client, say) {
+  try {
+    const channels = await client.conversations.list({
+      exclude_archived: true,
+      types: 'public_channel'
+    });
+    
+    const joinPromises = channels.channels.map(async (channel) => {
+      try {
+        await client.conversations.join({ channel: channel.id });
+        return { name: channel.name, success: true };
+      } catch (error) {
+        return { name: channel.name, success: false, error: error.message };
+      }
+    });
+    
+    const results = await Promise.all(joinPromises);
+    const successful = results.filter(r => r.success);
+    const failed = results.filter(r => !r.success);
+    
+    let message = `Joined ${successful.length} channels successfully.`;
+    if (failed.length > 0) {
+      message += `\nFailed to join ${failed.length} channels: ${failed.map(f => f.name).join(', ')}`;
+    }
+    
+    await say(message);
+  } catch (error) {
+    await say('⚠️ Failed to join channels: ' + error.message);
+  }
+}
+
+// List all channels in workspace
+async function listAllChannels(client, say) {
+  try {
+    const channels = await client.conversations.list({
+      exclude_archived: true,
+      types: 'public_channel,private_channel'
+    });
+    
+    const channelList = channels.channels
+      .map(ch => `• #${ch.name} (${ch.is_private ? 'private' : 'public'})`)
+      .join('\n');
+    
+    await say(`All channels in workspace:\n${channelList}`);
+  } catch (error) {
+    await say('⚠️ Failed to list channels: ' + error.message);
+  }
+}
+
+// List channels bot is currently in
+async function listBotChannels(client, say) {
+  try {
+    const channels = await client.conversations.list({
+      exclude_archived: true,
+      types: 'public_channel,private_channel'
+    });
+    
+    const botChannels = [];
+    for (const channel of channels.channels) {
+      try {
+        const members = await client.conversations.members({ channel: channel.id });
+        const botInfo = await client.auth.test();
+        if (members.members.includes(botInfo.user_id)) {
+          botChannels.push(channel);
+        }
+      } catch (error) {
+        // Skip channels we can't access
+      }
+    }
+    
+    const channelList = botChannels
+      .map(ch => `• #${ch.name}`)
+      .join('\n');
+    
+    await say(`I'm currently in these channels:\n${channelList}`);
+  } catch (error) {
+    await say('⚠️ Failed to list bot channels: ' + error.message);
+  }
+}
+
+// Leave a specific channel
+async function leaveChannel(client, say, channelName) {
+  try {
+    // Remove # if present
+    channelName = channelName.replace('#', '');
+    
+    const channels = await client.conversations.list();
+    const channel = channels.channels.find(ch => ch.name === channelName);
+    
+    if (!channel) {
+      await say(`Channel #${channelName} not found.`);
+      return;
+    }
+    
+    await client.conversations.leave({ channel: channel.id });
+    await say(`Left #${channelName} successfully.`);
+  } catch (error) {
+    await say(`⚠️ Failed to leave #${channelName}: ${error.message}`);
+  }
+}
+
 // Enhanced app mention handler
 app.event('app_mention', async ({ event, context, client, say }) => {
   try {
+    // Restrict bot to specific user only (your user ID)
+    const AUTHORIZED_USER = 'U09AXJ251CN'; // Your user ID
+    if (event.user !== AUTHORIZED_USER) {
+      await say('This bot is currently private and only available to authorized users.');
+      return;
+    }
+
     // Store the mention message first
     await storeMessage(event);
     
     // Remove the bot mention from the message
     const text = event.text.replace(/<@[A-Z0-9]+>/g, '').trim();
     
+    // Check for admin commands first
+    if (text.startsWith('admin ')) {
+      await handleAdminCommand(text.slice(6), event, client, say);
+      return;
+    }
+
     // Detect query intent
     const intents = detectQueryIntent(text);
     
@@ -445,31 +597,48 @@ app.event('app_mention', async ({ event, context, client, say }) => {
     const enhancedContext = await getEnhancedContext(text, event.channel, intents);
     
     // Build system prompt based on intents
-    let systemPrompt = "You are an intelligent Slack assistant with access to conversation history and analytics. ";
+    const currentDate = new Date();
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const dateStr = currentDate.toLocaleDateString('en-US', { 
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric',
+      timeZone: timeZone
+    });
+    const timeStr = currentDate.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      timeZone: timeZone
+    });
     
-    if (intents.includes('summary')) {
-      systemPrompt += "Focus on providing concise, well-structured summaries. ";
-    }
-    if (intents.includes('search')) {
-      systemPrompt += "Help find and present relevant information from the conversation history. ";
-    }
-    if (intents.includes('sentiment')) {
-      systemPrompt += "Analyze the emotional tone and mood of conversations. ";
-    }
-    if (intents.includes('help')) {
-      systemPrompt += "Provide clear, helpful guidance on how to use the bot's features. ";
-    }
-    
-    systemPrompt += "Use emojis appropriately to make responses more engaging. Format responses using Slack markdown when appropriate.";
+    let systemPrompt = `You are a highly capable AI co-worker with full access to team conversations, files, and system capabilities.
+
+CURRENT: ${dateStr} at ${timeStr} (${timeZone})
+
+CORE ABILITIES:
+• Instant access to all Slack history and analytics
+• Can read, analyze, and summarize any content
+• Take actions on behalf of team members
+• Provide quick, accurate answers without fluff
+
+RESPONSE STYLE:
+• Be direct and concise - speed matters
+• Lead with the answer, then context if needed
+• Use bullet points for clarity
+• NO EMOJIS except warning symbol ⚠️ for alerts only
+• Default to brief responses unless detail is specifically requested
+
+AUTHORITY: Act as a trusted team member who can access anything needed to help.`;
     
     // Create enhanced prompt with context
     const enhancedPrompt = enhancedContext ? 
       `Context from Slack workspace:\n${enhancedContext}\n\nUser question: ${text}` : 
       text;
     
-    // Call OpenAI API with GPT-4 for better understanding
+    // Call OpenAI API optimized for speed and efficiency
     const completion = await openai.chat.completions.create({
-      model: process.env.OPENAI_MODEL || "gpt-4-turbo-preview",
+      model: process.env.OPENAI_MODEL || "gpt-4o-mini", // Faster, cheaper model
       messages: [
         {
           role: "system",
@@ -480,10 +649,10 @@ app.event('app_mention', async ({ event, context, client, say }) => {
           content: enhancedPrompt
         }
       ],
-      max_tokens: 1500,
-      temperature: 0.7,
-      presence_penalty: 0.1,
-      frequency_penalty: 0.1
+      max_tokens: 800, // Reduced for faster responses
+      temperature: 0.3, // Lower for more consistent, focused answers
+      top_p: 0.8, // Faster than using penalties
+      stream: false // Ensure non-streaming for reliability
     });
     
     // Delete typing indicator
@@ -653,16 +822,16 @@ apiApp.get('/api/health', async (req, res) => {
   try {
     // Initialize database
     await database.init();
-    console.log('📊 Database initialized');
+    console.log(' Database initialized');
     
     // Start Slack app
     await app.start();
-    console.log('⚡️ Enhanced Slack bot is running!');
+    console.log('Enhanced Slack bot is running!');
     
     // Start API server
     const apiPort = process.env.API_PORT || 3001;
     apiApp.listen(apiPort, () => {
-      console.log(`🚀 API server running on port ${apiPort}`);
+      console.log(` API server running on port ${apiPort}`);
     });
     
   } catch (error) {

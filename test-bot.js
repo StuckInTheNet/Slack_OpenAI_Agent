@@ -63,7 +63,7 @@ app.event('app_mention', async ({ event, context, client, say }) => {
 (async () => {
   try {
     await app.start();
-    console.log('⚡️ Minimal Slack bot is running!');
+    console.log('️ Minimal Slack bot is running!');
   } catch (error) {
     console.error('Failed to start application:', error);
     process.exit(1);

@@ -43,8 +43,8 @@ apiApp.use('/api/*', rateLimit);
 
 // Only listen on localhost for security
 apiApp.listen(apiPort, '127.0.0.1', () => {
-  console.log(`🚀 API server running on localhost:${apiPort}`);
-  console.log(`🔐 API Key: ${API_KEY}`);
+  console.log(` API server running on localhost:${apiPort}`);
+  console.log(` API Key: ${API_KEY}`);
   console.log('⚠️  Add this to your .env file: API_SECRET_KEY=' + API_KEY);
 });
 

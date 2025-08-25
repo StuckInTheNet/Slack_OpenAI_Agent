@@ -1,9 +1,9 @@
-🚀 SLACK AI BOT - START HERE!
+ SLACK AI BOT - START HERE!
 ===============================
 
 If you're reading this, you've successfully downloaded the bot files! 
 
-🎯 NEXT STEP: Double-click the file called "CLICK-TO-SETUP.html"
+ NEXT STEP: Double-click the file called "CLICK-TO-SETUP.html"
 
 That file will open in your web browser and show you exactly what to do next.
 
@@ -15,6 +15,7 @@ The HTML guide will walk you through:
 - Installing Node.js (if needed)
 - Running the setup wizard  
 - Getting your API keys
+- Setting up private access (IMPORTANT for security!)
 - Starting the bot
 
 Need more help? Also read:
@@ -23,4 +24,4 @@ Need more help? Also read:
 
 Questions? Open an issue: https://github.com/StuckInTheNet/Slack_OpenAI_Agent/issues
 
-Let's get your AI assistant running! 🤖
+Let's get your AI assistant running! 

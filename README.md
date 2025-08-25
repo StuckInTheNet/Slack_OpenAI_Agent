@@ -1,45 +1,45 @@
-# Slack-OpenAI Agent 🤖
+# Slack-OpenAI Agent 
 
 **Your team's AI assistant that keeps your data private and under YOUR control**
 
-## 🚀 Quick Setup (5 minutes)
+##  Quick Setup (5 minutes)
 
 **Already downloaded? Open:** `SETUP-GUIDE.txt` (easy text instructions)
 
 **Need to download first?** [Download ZIP](https://github.com/StuckInTheNet/Slack_OpenAI_Agent/archive/refs/heads/master.zip) → Unzip → Open `SETUP-GUIDE.txt`
 
-## Why This Bot? 🎯
+## Why This Bot? 
 
 **The Problem:** Slack AI costs $10/user/month ($1,000/month for 100 users!) and your data goes to their servers.
 
 **This Solution:** 
-- ✅ **Your data stays yours** (stored locally)
-- ✅ **$5/month total cost** (vs $1,000/month for Slack AI)
-- ✅ **Unlimited users**
-- ✅ **Complete privacy control**
+-  **Your data stays yours** (stored locally)
+-  **$5/month total cost** (vs $1,000/month for Slack AI)
+-  **Owner-only access** (only you can use it)
+-  **Complete privacy control**
 
-## What It Does 💡
+## What It Does 
 
 - **Smart Search**: "Find all messages about the budget"
 - **Team Analytics**: "Who's been most active this week?"
 - **Summaries**: "What happened while I was out?"
 - **Context Answers**: "What did we decide about the new feature?"
 
-## Cost Comparison 💰
+## Cost Comparison 
 
 | Solution | 100 Users | Your Data | 
 |----------|-----------|-----------|
-| **Slack AI** | $12,000/year | ❌ Goes to Slack |
-| **This Bot** | $60/year | ✅ Stays with you |
-| **Savings** | **$11,940/year** | ✅ **Full control** |
+| **Slack AI** | $12,000/year |  Goes to Slack |
+| **This Bot** | $60/year |  Stays with you |
+| **Savings** | **$11,940/year** |  **Full control** |
 
-## Requirements 📋
+## Requirements 
 
 - Slack workspace (free or paid)
 - OpenAI account (~$1-5/month)
 - Computer to run it on
 
-## Setup Options 🛠️
+## Setup Options 
 
 1. **Easy**: Open `SETUP-GUIDE.txt` (recommended)
 2. **Visual**: Open `CLICK-TO-SETUP.html` 
@@ -47,19 +47,20 @@
 4. **Docker**: `docker-compose up`
 5. **We do it**: $299 setup service
 
-## Features 🚀
+## Features 
 
-### Slash Commands
-- `/ai-summary` - Get channel activity summary
-- `/ai-search <query>` - Search message history  
-- `/ai-help` - Show commands
+### 🔒 Security First
+- **Owner-only access**: Only you can use the bot (setup required)
+- **Private by default**: Others are silently ignored
+- **Safe in public channels**: Your queries and responses stay private
 
 ### Natural Language
 - `@bot who talked most today?`
 - `@bot summarize yesterday`
 - `@bot find messages about project deadline`
+- `@bot what day is it?` (includes current date/time context)
 
-## Customization 🎨
+## Customization 
 
 **Change bot name/avatar**: Slack app settings → App Home → Edit display name
 
@@ -73,21 +74,21 @@
 - Friendly: "Use casual language and be supportive" 
 - Data-focused: "Focus on facts and insights"
 
-## Security & Privacy 🔒
+## Security & Privacy 
 
-- ✅ Data stored locally (SQLite database)
-- ✅ Only you control access
-- ✅ No third-party data mining
-- ✅ GDPR compliant
-- ✅ Delete anytime
+-  Data stored locally (SQLite database)
+-  Only you control access
+-  No third-party data mining
+-  GDPR compliant
+-  Delete anytime
 
-## Support 🆘
+## Support 
 
 **Setup issues?** → `SETUP-HELP.md`  
 **Slack scope problems?** → `SLACK-SCOPES.md`  
 **Questions?** → [GitHub Issues](https://github.com/StuckInTheNet/Slack_OpenAI_Agent/issues)
 
-## For Managers 📊
+## For Managers 
 
 **Want this but don't want to set it up?**
 

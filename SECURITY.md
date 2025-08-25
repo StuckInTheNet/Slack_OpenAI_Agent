@@ -8,13 +8,13 @@ Since you exposed your tokens in this conversation, you should:
 
 ## Current Security Measures
 
-### ✅ Implemented:
+###  Implemented:
 - Environment variables for sensitive data
 - `.env` file excluded from Git
 - SQLite database local storage
 - Bot only responds to authenticated Slack events
 
-### ❌ Not Secure (Needs Fixing):
+###  Not Secure (Needs Fixing):
 
 1. **API Endpoints** - Currently open to anyone
    - Add authentication headers

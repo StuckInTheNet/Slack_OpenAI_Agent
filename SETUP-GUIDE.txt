@@ -1,14 +1,14 @@
-🚀 SLACK AI BOT - SETUP GUIDE
+ SLACK AI BOT - SETUP GUIDE
 =============================
 
 Welcome! Let's get your AI assistant running in 15 minutes.
 
-📋 WHAT YOU NEED:
+ WHAT YOU NEED:
 - A Slack workspace (free or paid)
 - An OpenAI account (free to create)
 - Node.js installed (we'll help you get this)
 
-🎯 STEP 1: INSTALL NODE.JS (5 minutes)
+ STEP 1: INSTALL NODE.JS (5 minutes)
 =====================================
 
 Node.js is what runs the bot. It's free and safe.
@@ -24,7 +24,7 @@ Test if it worked:
 Then type: node --version
 You should see something like: v18.17.0
 
-🎯 STEP 2: RUN THE SETUP WIZARD (5 minutes)
+ STEP 2: RUN THE SETUP WIZARD (5 minutes)
 ===========================================
 
 Now we'll run an interactive setup that does everything for you.
@@ -39,13 +39,13 @@ In the same Terminal/PowerShell window from above:
 6. Type: node setup-wizard.js
 
 The wizard will now ask you questions and help you get:
-✅ Your Slack bot token
-✅ Your OpenAI API key  
-✅ Everything configured properly
+ Your Slack bot token
+ Your OpenAI API key  
+ Everything configured properly
 
 Just follow the prompts - it will tell you exactly what to do!
 
-🎯 STEP 3: GET YOUR SLACK TOKENS (from the wizard)
+ STEP 3: GET YOUR SLACK TOKENS (from the wizard)
 ===================================================
 
 The wizard will guide you through this, but here's what it does:
@@ -65,7 +65,7 @@ IMPORTANT FOR STEP 3 (Socket Mode):
 5. Click "Generate" in the popup
 6. Copy the xapp- token
 
-🎯 STEP 4: GET YOUR OPENAI KEY (from the wizard)
+ STEP 4: GET YOUR OPENAI KEY (from the wizard)
 =================================================
 
 1. Takes you to: https://platform.openai.com/api-keys
@@ -73,16 +73,47 @@ IMPORTANT FOR STEP 3 (Socket Mode):
 3. Shows you how to create an API key
 4. Usually costs $1-5/month for normal use
 
-🎯 STEP 5: START YOUR BOT! (automatic)
-======================================
+ STEP 5: SET UP BOT SECURITY (IMPORTANT!)
+===========================================
 
-The wizard will:
-✅ Test all your keys work
-✅ Start the bot automatically
-✅ Show you how to invite it to channels
-✅ Give you example questions to ask
+The wizard will ask for your Slack User ID to keep the bot private to ONLY you.
 
-🛠️ TROUBLESHOOTING
+1. In Slack, click on your profile picture (top right)
+2. Click "View profile"
+3. Click the "..." (three dots menu)
+4. Click "Copy member ID"
+5. It looks like: U1234567890
+
+⚠️ CRITICAL: Without this, ANYONE in your company can use your bot and see sensitive information!
+
+With this security:
+✅ Only YOU can use the bot
+✅ Others are silently ignored
+✅ Your data stays private even in public channels
+
+ STEP 6: START YOUR BOT!
+==========================
+
+The wizard will offer to start the bot for you, but it's better to start manually:
+
+RECOMMENDED: Start the bot manually
+1. When the wizard asks "Would you like to start the bot now?" → Type: n
+2. Then run this command yourself: npm start
+3. You should see:
+    Database initialized
+   ️ Slack bot is running!
+    API server running on port 3001
+
+⚠️ If the wizard hangs on "Starting bot...":
+→ Press Ctrl+C to stop it
+→ Run: npm start (this shows better error messages)
+
+ What success looks like:
+- Bot starts within 5-10 seconds
+- You see "Slack bot is running!" message
+- No error messages
+
+ TROUBLESHOOTING
 ==================
 
 "I can't find Terminal/PowerShell"
@@ -100,11 +131,16 @@ The wizard will:
 → Make sure you typed: node setup-wizard.js (not just setup-wizard.js)
 → Make sure you're in the bot folder
 
+"Bot hangs on startup or won't connect"
+→ Check your .env file: cat .env (make sure tokens look right)
+→ Try: node index-enhanced.js (shows detailed errors)
+→ Make sure Socket Mode is enabled in your Slack app
+
 "I'm completely stuck"
 → Read SETUP-HELP.md for more detailed troubleshooting
 → Ask for help: https://github.com/StuckInTheNet/Slack_OpenAI_Agent/issues
 
-🎉 WHAT HAPPENS NEXT?
+ WHAT HAPPENS NEXT?
 =====================
 
 Once your bot is running:
@@ -120,9 +156,9 @@ Once your bot is running:
    • /ai-search pizza - find all messages about pizza
    • /ai-help - see what else it can do
 
-Your AI assistant is now ready to help your team! 🤖
+Your AI assistant is now ready to help your team! 
 
-💡 CUSTOMIZATION
+ CUSTOMIZATION
 ================
 
 Want to change your bot's name or personality?
@@ -134,4 +170,4 @@ Need help? All the files in this folder have different types of help:
 • README.md - Complete documentation
 • This file - Step-by-step setup guide
 
-You've got this! 🚀
+You've got this! 

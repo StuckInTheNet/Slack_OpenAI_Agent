@@ -2,13 +2,13 @@
 
 When setting up your Slack app, you need to add these **Bot Token Scopes**:
 
-## ✅ Required Scopes
+##  Required Scopes
 - **app_mentions:read** - So the bot knows when you mention it
 - **channels:history** - So the bot can read channel messages
 - **channels:read** - So the bot knows what channels exist
 - **chat:write** - So the bot can send messages
 
-## 🔧 Optional Scopes (add if available)
+##  Optional Scopes (add if available)
 - **commands** - For slash commands like /ai-summary
 - **users:read** - To get user names (bot works without this)
 
@@ -44,7 +44,7 @@ If you can't find `users:read` or another scope:
 
 After adding scopes, click **"Install to Workspace"** to update your bot's permissions.
 
-## 🔌 Socket Mode Setup (Step 3)
+##  Socket Mode Setup (Step 3)
 
 After setting up scopes, you need to enable Socket Mode:
 
@@ -58,7 +58,7 @@ After setting up scopes, you need to enable Socket Mode:
    - Click **"Generate"**
 6. **Copy the token** (starts with `xapp-`)
 
-## 📸 What You'll See:
+##  What You'll See:
 
 **Before enabling Socket Mode:**
 - Just a toggle switch that says "Enable Socket Mode"

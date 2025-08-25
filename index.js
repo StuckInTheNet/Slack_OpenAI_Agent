@@ -148,6 +148,13 @@ app.message(async ({ message, client }) => {
 // Listen for app mentions
 app.event('app_mention', async ({ event, context, client, say }) => {
   try {
+    // Check if the user is the bot owner
+    const ownerUserId = process.env.OWNER_USER_ID;
+    if (ownerUserId && event.user !== ownerUserId) {
+      // Silently ignore mentions from non-owners
+      return;
+    }
+    
     // Store the mention message first
     await storeMessage(event);
     
@@ -175,7 +182,29 @@ app.event('app_mention', async ({ event, context, client, say }) => {
       messages: [
         {
           role: "system",
-          content: "You are a helpful Slack assistant with access to recent conversation history. Use the provided context to give relevant, helpful responses about Slack activity and conversations."
+          content: `You are the company's AI superuser assistant with comprehensive knowledge of all organizational information. You have access to:
+
+- Complete conversation history and context from all Slack channels
+- All company documentation, policies, and procedures
+- Project timelines, deadlines, and status updates  
+- Team member roles, responsibilities, and expertise areas
+- Meeting notes, decisions, and action items
+- Technical documentation, code repositories, and system information
+- Company goals, OKRs, and strategic initiatives
+- Process workflows and operational procedures
+
+Your capabilities include:
+- Providing accurate answers about any company topic or person
+- Summarizing conversations, projects, and decisions
+- Tracking action items and follow-ups across teams
+- Identifying relevant subject matter experts for specific questions
+- Cross-referencing information from multiple channels and timeframes
+- Offering insights based on historical patterns and trends
+
+Always provide comprehensive, accurate responses drawing from your complete knowledge base. When referencing specific information, include relevant context about timing, participants, and related discussions.
+
+Current date and time: ${new Date().toLocaleString()}
+Today is ${new Date().toLocaleDateString('en-US', { weekday: 'long' })}`
         },
         {
           role: "user",
@@ -273,16 +302,16 @@ apiApp.get('/api/health', (req, res) => {
   try {
     // Initialize database
     await database.init();
-    console.log('📊 Database initialized');
+    console.log(' Database initialized');
     
     // Start Slack app
     await app.start();
-    console.log('⚡️ Slack bot is running!');
+    console.log('️ Slack bot is running!');
     
     // Start API server
     const apiPort = process.env.API_PORT || 3001;
     apiApp.listen(apiPort, () => {
-      console.log(`🚀 API server running on port ${apiPort}`);
+      console.log(` API server running on port ${apiPort}`);
     });
     
   } catch (error) {

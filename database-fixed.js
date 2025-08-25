@@ -12,7 +12,7 @@ class Database {
         if (err) {
           reject(err);
         } else {
-          console.log('📊 Database connected');
+          console.log(' Database connected');
           this.createTables().then(resolve).catch(reject);
         }
       });
@@ -94,7 +94,7 @@ class Database {
         this.db.run('CREATE INDEX IF NOT EXISTS idx_messages_thread ON messages(thread_ts)', (err) => {
           if (err) console.error('Error creating thread index:', err);
           else {
-            console.log('📊 Database tables and indexes created successfully');
+            console.log(' Database tables and indexes created successfully');
             resolve();
           }
         });

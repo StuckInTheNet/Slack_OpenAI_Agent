@@ -12,7 +12,7 @@ class EnhancedDatabase {
         if (err) {
           reject(err);
         } else {
-          console.log('📊 Enhanced Database connected');
+          console.log(' Enhanced Database connected');
           // Enable WAL mode for better performance
           this.db.run('PRAGMA journal_mode = WAL');
           this.db.run('PRAGMA synchronous = NORMAL');
@@ -148,7 +148,7 @@ class EnhancedDatabase {
             }
             indexCount++;
             if (indexCount === indexes.length) {
-              console.log('📊 Enhanced database tables and indexes created successfully');
+              console.log(' Enhanced database tables and indexes created successfully');
               resolve();
             }
           });

@@ -6,7 +6,7 @@ const path = require('path');
 const { exec } = require('child_process');
 
 console.log(`
-🤖 SLACK-OPENAI BOT SETUP WIZARD
+ SLACK-OPENAI BOT SETUP WIZARD
 ===============================
 
 This wizard will help you set up your Slack AI bot in just a few minutes!
@@ -16,7 +16,7 @@ What you'll need:
 2. An OpenAI account (free to create)
 3. About 10 minutes
 
-Let's get started! 🚀
+Let's get started! 
 `);
 
 const rl = readline.createInterface({
@@ -28,7 +28,7 @@ const questions = [
   {
     key: 'SLACK_BOT_TOKEN',
     question: `
-📱 STEP 1: Get your Slack Bot Token
+ STEP 1: Get your Slack Bot Token
 
 1. Go to: https://api.slack.com/apps
 2. Click "Create New App" → "From scratch"
@@ -49,7 +49,7 @@ Paste your Slack Bot Token here: `,
   {
     key: 'SLACK_SIGNING_SECRET',
     question: `
-🔐 STEP 2: Get your Signing Secret
+ STEP 2: Get your Signing Secret
 
 1. In the same Slack app, click "Basic Information"
 2. Scroll down to "App Credentials"
@@ -61,7 +61,7 @@ Paste your Signing Secret here: `,
   {
     key: 'SLACK_APP_TOKEN',
     question: `
-⚡ STEP 3: Enable Socket Mode
+ STEP 3: Enable Socket Mode
 
 1. Click "Socket Mode" in the sidebar
 2. Toggle it ON (you'll see "Enable Socket Mode")
@@ -77,7 +77,7 @@ Paste your App Token here: `,
   {
     key: 'OPENAI_API_KEY',
     question: `
-🧠 STEP 4: Get your OpenAI API Key
+ STEP 4: Get your OpenAI API Key
 
 1. Go to: https://platform.openai.com/api-keys
 2. Create an account (if you don't have one)
@@ -86,6 +86,21 @@ Paste your App Token here: `,
 
 Paste your OpenAI API Key here: `,
     validate: (input) => input.startsWith('sk-') || 'API key must start with sk-'
+  },
+  {
+    key: 'OWNER_USER_ID',
+    question: `
+ STEP 5: Set Bot Owner (Security)
+
+To keep your bot private, only YOU should be able to use it.
+
+1. In Slack, click on your profile picture
+2. Click "View profile"
+3. Click the "..." (three dots) → "Copy member ID"
+4. It will look like: U1234567890
+
+Paste your Slack User ID here: `,
+    validate: (input) => input.startsWith('U') && input.length > 5 || 'User ID must start with U and be longer than 5 characters'
   }
 ];
 
@@ -104,14 +119,14 @@ function askQuestion() {
     const validation = q.validate(answer.trim());
     
     if (validation !== true) {
-      console.log(`❌ ${validation}. Please try again.\n`);
+      console.log(` ${validation}. Please try again.\n`);
       askQuestion();
       return;
     }
 
     answers[q.key] = answer.trim();
     currentQuestion++;
-    console.log('✅ Got it!\n');
+    console.log(' Got it!\n');
     askQuestion();
   });
 }
@@ -122,6 +137,7 @@ SLACK_BOT_TOKEN=${answers.SLACK_BOT_TOKEN}
 SLACK_SIGNING_SECRET=${answers.SLACK_SIGNING_SECRET}
 SLACK_APP_TOKEN=${answers.SLACK_APP_TOKEN}
 OPENAI_API_KEY=${answers.OPENAI_API_KEY}
+OWNER_USER_ID=${answers.OWNER_USER_ID}
 OPENAI_MODEL=gpt-3.5-turbo
 PORT=3000
 API_PORT=3001
@@ -130,12 +146,15 @@ API_PORT=3001
   fs.writeFileSync('.env', envContent);
   
   console.log(`
-✅ SETUP COMPLETE!
+ SETUP COMPLETE!
 ==================
 
 Your .env file has been created with your credentials.
 
-🚀 NEXT STEPS:
+ SECURITY: Only you (${answers.OWNER_USER_ID}) can use this bot.
+           Others will be silently ignored for privacy.
+
+ NEXT STEPS:
 
 1. Set up Slack events:
    - Go back to your Slack app
@@ -150,26 +169,34 @@ Your .env file has been created with your credentials.
    - Invite the bot to a channel: /invite @YourBotName
    - Ask it something: @YourBotName hello!
 
-🎉 You're all set! Your AI assistant is ready to help your team.
+ You're all set! Your AI assistant is ready to help your team.
 
 Questions? Check the README or open an issue on GitHub.
 `);
 
   // Ask if user wants to start the bot before closing readline
-  rl.question('\nWould you like to start the bot now? (y/n): ', (answer) => {
+  console.log('\n⚠️  IMPORTANT: The wizard can start your bot, but sometimes it hangs.');
+  console.log('RECOMMENDED: Type "n" and start manually with "npm start" for better error messages.\n');
+  
+  rl.question('Would you like the wizard to start the bot now? (y/n): ', (answer) => {
     rl.close(); // Close readline after getting the answer
     
     if (answer.toLowerCase().startsWith('y')) {
-      console.log('\n🚀 Starting your bot...\n');
+      console.log('\n Starting your bot via wizard...');
+      console.log('⚠️  If it hangs, press Ctrl+C and run: npm start\n');
+      
       exec('npm start', (error, stdout, stderr) => {
         if (error) {
-          console.error('Error starting bot:', error);
+          console.error(' Error starting bot:', error.message);
+          console.log('\n Try running this manually instead: npm start');
           return;
         }
         console.log(stdout);
       });
     } else {
-      console.log('\nTo start your bot later, run: npm start');
+      console.log('\n Good choice! Now run this command to start your bot:');
+      console.log('npm start');
+      console.log('\nYou should see: "Slack bot is running!" within 5-10 seconds.');
       process.exit(0);
     }
   });
@@ -177,14 +204,14 @@ Questions? Check the README or open an issue on GitHub.
 
 // Check if Node.js dependencies are installed
 if (!fs.existsSync('node_modules')) {
-  console.log('📦 Installing dependencies first...\n');
+  console.log(' Installing dependencies first...\n');
   exec('npm install', (error, stdout, stderr) => {
     if (error) {
-      console.error('❌ Error installing dependencies:', error);
+      console.error(' Error installing dependencies:', error);
       console.log('\nPlease run "npm install" manually, then run this wizard again.');
       process.exit(1);
     }
-    console.log('✅ Dependencies installed!\n');
+    console.log(' Dependencies installed!\n');
     askQuestion();
   });
 } else {

@@ -1,4 +1,4 @@
-# 🚀 Quick Setup Guide
+#  Quick Setup Guide
 
 **Can't figure out how to run the setup wizard? Start here!**
 
@@ -56,3 +56,15 @@ chmod +x setup-mac.sh
 ---
 
 **The wizard is interactive - it will guide you step by step once it starts!**
+
+## ⚠️ Important Security Step
+
+The wizard will ask for your **Slack User ID** to keep the bot private to only you.
+
+**How to find your Slack User ID:**
+1. Click your profile picture in Slack
+2. Click "View profile"  
+3. Click "..." → "Copy member ID"
+4. It looks like: U1234567890
+
+**Without this, anyone in your company can use your bot and access sensitive information!**
